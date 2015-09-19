@@ -6,7 +6,10 @@ Webpack handles dependencies, modules, ES6 etc.
 Webpack is the "newer" way of doing this (as compared to Browserify)
 */
 import $ from 'jquery';
+import Router from './router';
+import Backbone from 'backbone';
 
 $(() => {
-  $('#body').html('23');
+  window.router = new Router();
+  Backbone.history.start();
 });
