@@ -16,13 +16,13 @@ export function getAllTodo() {
   return ensureListExists().then(() => {
     return fs.readFile(tdlist, 'utf-8');
   }).then(items => {
-    return items.split(/\n/).slice(0, -1);
+    return items.split(/\n/).slice(0, -1).map( title => ({title}));
   });
 }
 
 export function addTodoItem(item) {
   return ensureListExists().then(() => {
-    return fs.appendFile(tdlist, item + '\n');
+    return fs.appendFile(tdlist, item.title + '\n');
   });
 }
 
