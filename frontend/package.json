@@ -5,22 +5,32 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node --harmony index.js",
+    "build": "webpack --verbose --colors --display-error-details --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-core": "^5.8.25",
+    "babel-eslint": "^4.1.2",
+    "babel-loader": "^5.3.2",
     "eslint": "^1.4.3",
-    "eslint-plugin-react": "^3.4.0",
     "eslint-config-airbnb": "0.0.8",
-    "babel-eslint": "^4.1.2"
+    "eslint-plugin-react": "^3.4.0",
+    "handlebars": "^4.0.2",
+    "handlebars-loader": "^1.1.4",
+    "webpack": "^1.12.2"
   },
   "dependencies": {
     "babel": "^5.8.23",
+    "babel-runtime": "^5.8.24",
+    "backbone": "^1.2.3",
     "body-parser": "^1.14.0",
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1",
+    "express-http-proxy": "^0.6.0",
     "fs": "0.0.2",
+    "jquery": "^2.1.4",
     "lodash": "^3.10.1",
     "morgan": "^1.6.1",
     "mz": "^2.0.0",

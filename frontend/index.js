@@ -4,47 +4,38 @@ and do simple CRUD operations.
 Or maybe something simpler.
 
 This is our controller.
+
+Architecture:
+
+Separate into frontend and backend.
+
+Frontend is stateless. In charge of rendering HTML.
+
+Backend has state. Communicates using json (sends and receives).
+Interfaces with database.
+
+Both coexist in the server.
+
+Could load-balance the front end easily
+(not so for the backend - may run into race conditions).
+
+Browser is a separate entity - simply receives HTML.
 */
 import express from 'express';
-import hbs from 'express-handlebars';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-import request from 'superagent';
+import proxy from 'express-http-proxy';
 
 const app = express();
 
-app.engine('hbs', hbs({defaultLayout: 'main', extname: '.hbs'}));
-app.set('view engine', '.hbs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('combined'));
 
 const backend = 'http://localhost:3001';
 
-app.get('/', (req, res, next) => {
-  request.get(`${backend}/todos`).then( ({body: list}) => {
-    res.render('index', {
-      title: 'Slick Todo List',
-      todos: list
-    });
-  }, (err) => {
-    next(err);
-  });
-});
-
-app.post('/', (req, res, next) => {
-  request.post(`${backend}/todos`).send({title: req.body.newtodoitem})
-  .then(() => {
-    res.redirect('/');
-  }, (err) => {
-    next(err);
-  });
-});
-
-app.get('/edit', (req, res) => {
-  res.render('edittodo', {
-    title: 'Edit todo list'
-  });
-});
+app.use('/api', proxy(backend));
+app.use(express.static('public'));
+app.use(express.static('build'));
 
 app.listen(3000, () => {
   /* eslint no-console:0 */
