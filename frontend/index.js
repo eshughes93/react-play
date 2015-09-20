@@ -2,9 +2,6 @@
 Simple web service to act like a blog
 and do simple CRUD operations.
 Or maybe something simpler.
-
-This is our controller.
-
 Architecture:
 
 Separate into frontend and backend.

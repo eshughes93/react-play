@@ -5,11 +5,15 @@ Webpack handles dependencies, modules, ES6 etc.
 
 Webpack is the "newer" way of doing this (as compared to Browserify)
 */
-import $ from 'jquery';
 import Router from './router';
-import Backbone from 'backbone';
+import reducer from './reducers/todoreducer';
+import middleware from './middleware';
+import React from 'react';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
 
-$(() => {
-  window.router = new Router();
-  Backbone.history.start();
-});
+const store = applyMiddleware(middleware)(createStore)(reducer);
+React.render(
+  <Provider store={store}>{() => <Router />}</Provider>,
+  document.getElementById('body')
+);
