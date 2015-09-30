@@ -1,5 +1,4 @@
 /*
-React index view.
 Rendering components using React.
 Each component has its own state and props (properties).
 Components can have local state if they need it.

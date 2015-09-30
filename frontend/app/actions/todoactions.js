@@ -49,3 +49,17 @@ export function create(item) {
     item
   };
 }
+
+export function remove(itemIndex) {
+  return {
+    types: [
+      'ITEM_DELETE',
+      'ITEM_DELETE_SUCCESS',
+      'ITEM_DELETE_FAIL'
+    ],
+    promise: client => {
+      return client.put('/todos', itemIndex);
+    },
+    itemIndex
+  };
+}

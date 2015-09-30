@@ -1,6 +1,5 @@
 /*
 react-router
-
 */
 import {Router as BaseRouter, Route} from 'react-router';
 import React, {Component} from 'react';

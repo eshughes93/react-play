@@ -10,7 +10,6 @@ Switch on the action's type.
 
 State is always flat (usually immutable) json. Simple, easily serialized.
 
-
 */
 
 const initialState = {
@@ -48,6 +47,24 @@ export default function todoReducer(state = initialState, action) {
     todos: [...state.todos, action.item]
   };
   case 'ITEM_SAVE_FAIL': return {
+    ...state,
+    isSaving: false,
+    error: action.error
+  };
+  case 'ITEM_DELETE': return {
+    ...state,
+    isSaving: true
+  };
+  case 'ITEM_DELETE_SUCCESS':
+    /* eslint prefer-const:0 */
+    let todosArr = state.todos;
+    todosArr.splice(action.itemIndex.itemIndex, 1);
+    return {
+      ...state,
+      isSaving: false,
+      todos: todosArr
+    };
+  case 'ITEM_DELETE_FAIL': return {
     ...state,
     isSaving: false,
     error: action.error

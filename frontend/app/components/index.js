@@ -17,7 +17,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import {list} from '../actions/todoactions';
-
+import Remove from './removetodo';
 @connect( state => ({
   todos: state.todos,
   loaded: state.loaded,
@@ -39,11 +39,14 @@ export default class Index extends Component {
     const {todos, loaded, isLoading} = this.props;
     return (<div className="row">
       {(loaded ? todos : []).map((todo, i) =>
-       <div className="well" key={i}>{todo.title}</div>
+       <div className="well" key={i}>
+       {todo.title}
+       <Remove {...this.props} itemIndex={i} />
+       </div>
       )}
       {isLoading && <img src="http://media.giphy.com/media/10kTz4r3ishQwU/giphy.gif" />}
       <p>
-        <Link to="/edit">Edit This List</Link>
+        <Link to="/edit">Add To This List</Link>
       </p>
     </div>);
   }

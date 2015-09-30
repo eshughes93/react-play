@@ -13,4 +13,7 @@ export default class Client {
   post(path, data) {
     return request.post(`/api${path}`, data);
   }
+  put(path, data) {
+    return request.put(`/api${path}`, data);
+  }
 }

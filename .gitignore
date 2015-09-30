@@ -2,3 +2,4 @@ node_modules
 backend/todolist
 frontend/build
 npm-debug.log
+notes.md
