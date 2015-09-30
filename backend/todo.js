@@ -30,8 +30,8 @@ export function rmTodoItem(index) {
   return ensureListExists().then(() => {
     return getAllTodo();
   }).then(items => {
-    items.splice(index, 1);
-    const itemsWithNL = items.map(i => [i, '\n']);
-    return fs.writeFile(tdlist, _.flatten(itemsWithNL));
+    items.splice(index.itemIndex, 1);
+    const itemsWithNL = items.map(i => [i.title, '\n']);
+    return fs.writeFile(tdlist, _.flatten(itemsWithNL).join(''));
   });
 }

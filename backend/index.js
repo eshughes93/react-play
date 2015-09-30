@@ -25,7 +25,15 @@ app.get('/todos', (req, res, next) => {
 
 app.post('/todos', (req, res, next) => {
   todo.addTodoItem(req.body).then(() => {
-    res.send({msg:'added todo item'})
+    res.send({msg: 'added todo item'});
+  }).catch((err) => {
+    next(err);
+  });
+});
+
+app.put('/todos', (req, res, next) => {
+  todo.rmTodoItem(req.body).then(() => {
+    res.send({msg: 'removed todo item'});
   }).catch((err) => {
     next(err);
   });
